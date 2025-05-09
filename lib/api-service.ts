@@ -1,9 +1,15 @@
 // API service for handling all API requests
 
 // Base API URLs
-const CHAT_API_URL = "http://localhost:5000/chat"
+const CHAT_API_URL = "https://qpc28cj1-8000.inc1.devtunnels.ms/get-response"
 const AUDIO_TRANS_API_URL = "/audio_trans"
-
+const QUIZ_API_URL = "https://qpc28cj1-8000.inc1.devtunnels.ms/generate_quiz"
+const TEXT_MATCHING_API_URL = "https://qpc28cj1-8000.inc1.devtunnels.ms/text-matching-activity"
+const GET_VOICE_INPUT_PRACTICE_API_URL = "https://qpc28cj1-8000.inc1.devtunnels.ms/voice-input-practice"
+const CHECK_VOICE_INPUT_API_URL = "https://qpc28cj1-8000.inc1.devtunnels.ms/voice-input-check"
+const SPEAKING_PRACTICE_API_URL = "https://qpc28cj1-8000.inc1.devtunnels.ms/speaking-practice"
+const GET_TYPING_PRACTICE_API_URL = "https://telugu-chatbot.herokuapp.com/api/get-sentences"
+const CHECK_TYPING_PRACTICE_API_URL = "https://telugu-chatbot.herokuapp.com/api/check-sentences"
 // Types
 export type ChatMessage = {
   role: "user" | "assistant"
@@ -81,10 +87,10 @@ export async function sendChatMessage(request: ChatRequest): Promise<ChatRespons
 
   if (request.type === "text") {
     formData.append("type", "text")
-    formData.append("prompt", request.prompt as string)
+    formData.append("query_message", request.prompt as string)
   } else {
     formData.append("type", "audio")
-    formData.append("prompt", request.prompt as File)
+    formData.append("query_message", request.prompt as File)
   }
 
   const response = await fetch(CHAT_API_URL, {
@@ -100,7 +106,7 @@ export async function sendChatMessage(request: ChatRequest): Promise<ChatRespons
 }
 
 export async function generateQuiz(topic: string, numQuestions: number, difficulty: string): Promise<QuizQuestion[]> {
-  const response = await fetch("/api/quiz", {
+  const response = await fetch(QUIZ_API_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -120,7 +126,7 @@ export async function generateQuiz(topic: string, numQuestions: number, difficul
 }
 
 export async function generateTextMatching(mainTopic: string, difficulty: string): Promise<TextMatchingItem[]> {
-  const response = await fetch("/api/text-matching", {
+  const response = await fetch( TEXT_MATCHING_API_URL , {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -139,7 +145,7 @@ export async function generateTextMatching(mainTopic: string, difficulty: string
 }
 
 export async function generateVoiceInputPractice(topic: string, difficulty: string): Promise<VoiceInputPracticeItem[]> {
-  const response = await fetch("/api/voice-input-practice", {
+  const response = await fetch(GET_VOICE_INPUT_PRACTICE_API_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -162,7 +168,7 @@ export async function generateSpeakingPractice(
   mainTopic: string,
   difficulty: string,
 ): Promise<SpeakingPracticeActivity> {
-  const response = await fetch("/api/speaking-practice", {
+  const response = await fetch(SPEAKING_PRACTICE_API_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -185,10 +191,10 @@ export async function checkVoiceInput(
   audioFile: File,
 ): Promise<VoiceInputCheckResponse> {
   const formData = new FormData()
-  formData.append("telugu-text", data.Telugu)
   formData.append("audio", audioFile)
+  formData.append("data", data.English)
 
-  const response = await fetch("/api/voice-input-check", {
+  const response = await fetch(CHECK_VOICE_INPUT_API_URL, {
     method: "POST",
     body: formData,
   })
@@ -204,7 +210,7 @@ export async function getTypingPracticeSentences(
   user: string,
   difficultyLevel: string,
 ): Promise<TypingPracticeResponse> {
-  const response = await fetch("/api/typing-practice", {
+  const response = await fetch(GET_TYPING_PRACTICE_API_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -223,7 +229,7 @@ export async function getTypingPracticeSentences(
 }
 
 export async function checkTypingPractice(telugu: string, english: string): Promise<TypingPracticeCheckResponse> {
-  const response = await fetch("/api/typing-practice-check", {
+  const response = await fetch(CHECK_TYPING_PRACTICE_API_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
