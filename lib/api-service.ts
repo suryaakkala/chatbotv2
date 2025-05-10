@@ -2,14 +2,14 @@
 
 // Base API URLs
 const CHAT_API_URL = "https://qpc28cj1-8000.inc1.devtunnels.ms/get-response"
-const AUDIO_TRANS_API_URL = "/audio_trans"
-const QUIZ_API_URL = "https://qpc28cj1-8000.inc1.devtunnels.ms/generate_quiz"
+const AUDIO_TRANS_API_URL = "https://qpc28cj1-8000.inc1.devtunnels.ms/audio_trans"
+const QUIZ_API_URL = "https://qpc28cj1-8000.inc1.devtunnels.ms/quiz-generator"
 const TEXT_MATCHING_API_URL = "https://qpc28cj1-8000.inc1.devtunnels.ms/text-matching-activity"
 const GET_VOICE_INPUT_PRACTICE_API_URL = "https://qpc28cj1-8000.inc1.devtunnels.ms/voice-input-practice"
 const CHECK_VOICE_INPUT_API_URL = "https://qpc28cj1-8000.inc1.devtunnels.ms/voice-input-check"
-const SPEAKING_PRACTICE_API_URL = "https://qpc28cj1-8000.inc1.devtunnels.ms/speaking-practice"
-const GET_TYPING_PRACTICE_API_URL = "https://telugu-chatbot.herokuapp.com/api/get-sentences"
-const CHECK_TYPING_PRACTICE_API_URL = "https://telugu-chatbot.herokuapp.com/api/check-sentences"
+const SPEAKING_PRACTICE_API_URL = "https://qpc28cj1-8000.inc1.devtunnels.ms/speaking-practice-activity"
+const GET_TYPING_PRACTICE_API_URL = "https://telugu-chatbot.herokuapp.com/get-sentences"
+const CHECK_TYPING_PRACTICE_API_URL = "https://telugu-chatbot.herokuapp.com/check-sentences"
 // Types
 export type ChatMessage = {
   role: "user" | "assistant"
